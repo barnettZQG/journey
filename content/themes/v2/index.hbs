@@ -1,0 +1,51 @@
+{{!< default}}
+<main class="contentlist" role="main">
+	<section class="contentlist_inner">
+		{{#foreach posts}}
+		<article itemscope itemtype="http://schema.org/BlogPosting" style="visibility: visible;
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+    transition: all 0.2s ease-in 0s, transform 0s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;" role="article" class="post_item {{post_class}}">
+			<div class="article-meta">
+				<a href="/201612/study-conclusion-stage.html" class="article-date" target="_blank">
+				<time datetime="{{date published_at format="YYYY-MM-DD"}}" itemprop="datePublished">
+							{{date published_at timeago="true"}}
+						</time>
+			    </a>
+			</div>
+			<header class="post_item_header">
+				<h2 itemprop="name" class="post_item_title">
+					<a href="{{url}}" itemprop="url" data-pjax title="{{{title}}}">
+						{{{title}}}
+					</a>
+				</h2>
+			</header>
+			<section itemprop="description" class="post_item_excerpt">
+				{{#if image}}
+					<img src="{{image}}" alt="image" class="post_item_image" />
+				{{/if}}
+				<p>{{excerpt words="35"}}&hellip;&nbsp;<a href="{{url}}" itemprop="url">»</a></p>
+			</section>
+			<footer class="post_item_footer">
+				<ul class="post_item_meta_list">
+					{{#if tags}}
+					<li class="post_item_meta_item post_tags">
+						{{#foreach tags}}
+						<a href="/tag/{{name}}">{{name}}</a>
+						{{/foreach}}
+						<a href="{{url}}#disqus_thread">Comments</a>
+					</li>
+					{{/if}}
+
+					
+				</ul>
+			</footer>
+		</article>
+		{{/foreach}}
+		{{#if pagination}}
+		<div class="contentlist_pagination">
+			{{{pagination}}}
+		</div>
+		{{/if}}
+	</section>
+</main>
