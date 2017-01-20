@@ -29,15 +29,12 @@
 			<footer class="post_item_footer">
 				<ul class="post_item_meta_list">
 					{{#if tags}}
-					<li class="post_item_meta_item post_tags">
 						{{#foreach tags}}
-						<a href="/tag/{{name}}">{{name}}</a>
+							<li class="post_item_meta_item post_tags">
+							<a href="/tag/{{name}}">{{name}}</a>
+							</li>
 						{{/foreach}}
-						<a href="{{url}}#disqus_thread">Comments</a>
-					</li>
 					{{/if}}
-
-					
 				</ul>
 			</footer>
 		</article>
