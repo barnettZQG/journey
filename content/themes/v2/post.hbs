@@ -5,15 +5,18 @@
         <header class="article-header">
            <h1 class="contentpost_headline post-title" itemprop="url" data-pjax title="{{{title}}}">{{{title}}}</h1>
         </header>
-        <ul class="post_item_meta_list">
-        {{#if tags}}
-            {{#foreach tags}}
-            <li class="post_item_meta_item post_tags">
-            <a href="/tag/{{name}}">{{name}}</a>
-             </li>
-            {{/foreach}}
-        {{/if}}
-        </ul>
+        <div class="tag-post row">
+            <ul class="post_item_meta_list">
+            {{#if tags}}
+                {{#foreach tags}}
+                <li class="post_item_meta_item post_tags">
+                <a href="/tag/{{name}}">{{name}}</a>
+                </li>
+                {{/foreach}}
+            {{/if}}
+            </ul>
+            <div class="clear"></div>
+        </div>
         <section class="contentpost_articlecontent post-content">
             {{content}}
         </section>
