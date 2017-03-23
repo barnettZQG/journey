@@ -27,7 +27,7 @@ const stmtUpdateGhostRoles = "UPDATE roles SET created_at = ?, updated_at = ? WH
 const stmtUpdateGhostSettings = "UPDATE settings SET created_at = ?, updated_at = ? WHERE id = ?"
 const stmtUpdateGhostPermissions = "UPDATE permissions SET created_at = ?, updated_at = ? WHERE id = ?"
 const stmtUpdateGhostClients = "UPDATE clients SET created_at = ?, updated_at = ? WHERE id = ?"
-const stmtUpdateGhostTheme = "UPDATE settings SET value = ?, updated_at = ?, updated_by = ? WHERE key = 'activeTheme'"
+const stmtUpdateGhostTheme = "UPDATE settings SET `value` = ?, updated_at = ?, updated_by = ? WHERE key = 'activeTheme'"
 
 type dateHolder struct {
 	id          int64

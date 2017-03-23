@@ -2,7 +2,17 @@
 <main class="contentlist" role="main">
 	<section class="contentlist_inner">
 		{{#foreach posts}}
-		<article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post_item {{post_class}}">
+		<article itemscope itemtype="http://schema.org/BlogPosting" style="visibility: visible;
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+    transition: all 0.2s ease-in 0s, transform 0s cubic-bezier(0.6, 0.2, 0.1, 1) 0s, opacity 0s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;" role="article" class="post_item {{post_class}}">
+			<div class="article-meta">
+				<a  class="article-date" target="_blank">
+				<time datetime="{{date published_at format="YYYY-MM-DD"}}" itemprop="datePublished">
+							{{date published_at timeago="true"}}
+						</time>
+			    </a>
+			</div>
 			<header class="post_item_header">
 				<h2 itemprop="name" class="post_item_title">
 					<a href="{{url}}" itemprop="url" data-pjax title="{{{title}}}">
@@ -18,19 +28,14 @@
 			</section>
 			<footer class="post_item_footer">
 				<ul class="post_item_meta_list">
-					<li class="post_item_meta_item">
-						<time datetime="{{date published_at format="YYYY-MM-DD"}}" itemprop="datePublished">
-							{{date published_at timeago="true"}}
-						</time>
-					</li>
 					{{#if tags}}
-					<li class="post_item_meta_item post_tags">
-						{{tags}}
-					</li>
+						{{#foreach tags}}
+							<li class="post_item_meta_item post_tags">
+							<a href="/tag/{{name}}">{{name}}</a>
+							</li>
+						{{/foreach}}
 					{{/if}}
-					<li class="post_item_meta_item">
-						<a href="{{url}}#disqus_thread">Comments</a>
-					</li>
+					<div class="clear"></div>
 				</ul>
 			</footer>
 		</article>

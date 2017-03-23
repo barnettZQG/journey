@@ -25,24 +25,40 @@
 
 </head>
 <body class="{{body_class}}">
-    <header class="sidebar" {{#if @blog.cover}}style="background-image: url({{@blog.cover}})"{{/if}}>
+    <header class="sidebar">
+        <div class="overlay" style="opacity: 0.3;"></div>
         <div class="sidebar_inner">
             <div class="sidebar_header">
-                <div class="sidebar_userimage" {{#if @blog.logo}}style="background-image: url({{@blog.logo}})"{{/if}}></div>
-                <h1 class="sidebar_title">{{@blog.title}}</h1>
+                <a class="sidebar_userimage"><img src="{{#if @blog.logo}}{{@blog.logo}}{{/if}}"></a>
+            </div>
+            <div class="sidebar_info">
+                <h2>曾庆国</h2>
+                <p>容器云(Paas)计算，分布式服务开发</p>
+            </div>
+            <div class="sidebar_menus">
+                <ul class="sidebar_menus_ul">
+                {{#foreach navigation}}
+                <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}" role="presentation"><a href="{{url absolute="true"}}">{{label}}</a></li>
+                {{/foreach}}
+                </ul>
             </div>
             <div class="sidebar_symbols">
-                <a href="http://www.github.com" target="_blank" title="GitHub"><i class="fa fa-github-square fa-lg sidebar_symbol github_symbol"></i></a>
-                <a href="http://www.twitter.com" target="_blank" title="Twitter"><i class="fa fa-twitter-square fa-lg sidebar_symbol twitter_symbol"></i></a>
-                <a href="http://www.linkedin.com" target="_blank" title="LinkedIn"><i class="fa fa-linkedin-square fa-lg sidebar_symbol linkedin_symbol"></i></a>
-                <a href="http://www.youtube.com" target="_blank" title="YouTube"><i class="fa fa-youtube-square fa-lg sidebar_symbol youtube_symbol"></i></a>
-                <a href="http://www.xing.com" target="_blank" title="Xing"><i class="fa fa-xing-square fa-lg sidebar_symbol xing_symbol"></i></a>
-                <a href="http://www.flickr.com" target="_blank" title="Flickr"><i class="fa fa-flickr fa-lg sidebar_symbol flickr_symbol"></i></a>
-                <a href="/rss/" target="_blank" title="Subscribe"><i class="fa fa-rss-square fa-lg sidebar_symbol rss_symbol"></i></a>
+                <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/barnettzqg" title="GitHub"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/u/1869907262" title="新浪微博"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/rss" title="RSS"></a>
+                            
+                                <a class="fa Email" target="_blank" href="mailto:zengqg@yiyun.pro" title="Email"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/576501057" title="QQ"></a>
+                            
+                                <a class="fa Twitter" target="_blank" href="https://twitter.com/zengqingguo" title="Twitter"></a>
+                            
+                 </ul>
             </div>
-            <h2 class="sidebar_link"><a href="/">Blog</a></h2>
-            <h2 class="sidebar_link"><a href="/about">About</a></h2>
-            <h2 class="sidebar_link"><a href="/projects">Projects</a></h2>
         </div>
     </header>
     {{{body}}}

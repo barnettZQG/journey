@@ -12,7 +12,7 @@ const stmtInsertUser = "INSERT INTO users (id, uuid, name, slug, password, email
 const stmtInsertRoleUser = "INSERT INTO roles_users (id, role_id, user_id) VALUES (?, ?, ?)"
 const stmtInsertTag = "INSERT INTO tags (id, uuid, name, slug, created_at, created_by, updated_at, updated_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
 const stmtInsertPostTag = "INSERT INTO posts_tags (id, post_id, tag_id) VALUES (?, ?, ?)"
-const stmtInsertSetting = "INSERT INTO settings (id, uuid, key, value, type, created_at, created_by, updated_at, updated_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+const stmtInsertSetting = "INSERT INTO settings (id, uuid, `key`, `value`, `type`, created_at, created_by, updated_at, updated_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
 func InsertPost(title []byte, slug string, markdown []byte, html []byte, featured bool, isPage bool, published bool, image []byte, created_at time.Time, created_by int64) (int64, error) {
 

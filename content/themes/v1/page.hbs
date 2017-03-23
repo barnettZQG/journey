@@ -1,19 +1,47 @@
 {{!< default}}
-<main class="content contentpost" role="main">
+<main class="content contentpost {{#foreach tags}}{{#if @first}}{{encode name}}{{/if}}{{/foreach}}" role="main">
     <article class="contentpost_inner {{post_class}}" itemscope itemtype="http://schema.org/BlogPosting" role="article">
         {{#post}}
-        {{#if tags}}<span class="contentpost_meta">{{tags separator=" · "}}</span>{{/if}}
-        <h1 class="contentpost_headline post-title" itemprop="url" data-pjax title="{{{title}}}">{{{title}}}</h1>
+        <header class="article-header">
+           <h1 class="contentpost_headline post-title" itemprop="url" data-pjax title="{{{title}}}">{{{title}}}</h1>
+        </header>
+        <ul class="post_item_meta_list">
+        {{#if tags}}
+        <li class="post_item_meta_item post_tags">
+            {{#foreach tags}}
+            <a href="/tag/{{name}}">{{name}}</a>
+            {{/foreach}}
+        </li>
+        {{/if}}
+        </ul>
         <section class="contentpost_articlecontent post-content">
             {{content}}
         </section>
-        <footer class="contentpost_footer_page post-footer">
+        <footer class="contentpost_footer post-footer">
             <section class="share">
                 <a href="https://twitter.com/share?text={{encode title}}&amp;url={{url absolute="true"}}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Share on Twitter"><i class="fa fa-twitter fa-lg share_symbol twitter_symbol"></i></a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Share on Facebook"><i class="fa fa-facebook fa-lg share_symbol facebook_symbol"></i></a>
                 <a href="https://plus.google.com/share?url={{url absolute="true"}}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" title="Share on Google+"><i class="fa fa-google-plus fa-lg share_symbol google-plus_symbol"></i></a>
             </section>
+            <div class="contentpost_footerbar">
+                <section class="contentpost_sidebar_meta clearfix">
+                    <h5>Published:</h5><time datetime="{{date format="YYYY-MM-DD"}}">{{date format='DD MMM YYYY'}}</time>
+                </section>
+            </div>
         </footer>
+        <div style="padding:15px">
+            <!--PC和WAP自适应版-->
+            <div id="SOHUCS" sid="{{id}}" style="box-sizing: border-box;"></div> 
+            <script type="text/javascript"> 
+            (function(){ 
+            var appid = 'cysUnrRpS'; 
+            var conf = 'prod_edd3f8f9c5194c8ead543433bc9ca728'; 
+            var width = window.innerWidth || document.documentElement.clientWidth; 
+            if (width < 960) { 
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } 
+            else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); 
+            </script>
+        </div>
         {{/post}}
     </article>
 </main>

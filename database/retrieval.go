@@ -26,7 +26,7 @@ const stmtRetrieveTagBySlug = "SELECT id, name, slug FROM tags WHERE slug = ?"
 const stmtRetrieveTagIdBySlug = "SELECT id FROM tags WHERE slug = ?"
 const stmtRetrieveHashedPasswordByName = "SELECT password FROM users WHERE name = ?"
 const stmtRetrieveUsersCount = "SELECT count(*) FROM users"
-const stmtRetrieveBlog = "SELECT value FROM settings WHERE key = ?"
+const stmtRetrieveBlog = "SELECT value FROM settings WHERE `key` = ?"
 const stmtRetrievePostCreationDateById = "SELECT created_at FROM posts WHERE id = ?"
 
 func RetrievePostById(id int64) (*structure.Post, error) {
@@ -103,10 +103,16 @@ func extractPosts(rows *sql.Rows) (*[]structure.Post, error) {
 		post := structure.Post{}
 		var userId int64
 		var status string
-		err := rows.Scan(&post.Id, &post.Uuid, &post.Title, &post.Slug, &post.Markdown, &post.Html, &post.IsFeatured, &post.IsPage, &status, &post.Image, &userId, &post.Date)
+		var updateTime string
+		err := rows.Scan(&post.Id, &post.Uuid, &post.Title, &post.Slug, &post.Markdown, &post.Html, &post.IsFeatured, &post.IsPage, &status, &post.Image, &userId, &updateTime)
 		if err != nil {
 			return nil, err
 		}
+		time, err := time.Parse("2006-01-02 15:04:05", updateTime)
+		if err != nil {
+			return nil, err
+		}
+		post.Date = &time
 		// If there was no publication date attached to the post, make its creation date the date of the post
 		if post.Date == nil {
 			post.Date, err = retrievePostCreationDateById(post.Id)
@@ -138,12 +144,18 @@ func extractPosts(rows *sql.Rows) (*[]structure.Post, error) {
 func extractPost(row *sql.Row) (*structure.Post, error) {
 	post := structure.Post{}
 	var userId int64
-	var status string
-	err := row.Scan(&post.Id, &post.Uuid, &post.Title, &post.Slug, &post.Markdown, &post.Html, &post.IsFeatured, &post.IsPage, &status, &post.Image, &userId, &post.Date)
+	var status, updateTime string
+
+	err := row.Scan(&post.Id, &post.Uuid, &post.Title, &post.Slug, &post.Markdown, &post.Html, &post.IsFeatured, &post.IsPage, &status, &post.Image, &userId, &updateTime)
 	if err != nil {
 		return nil, err
 	}
 	// If there was no publication date attached to the post, make its creation date the date of the post
+	time, err := time.Parse("2006-01-02 15:04:05", updateTime)
+	if err != nil {
+		return nil, err
+	}
+	post.Date = &time
 	if post.Date == nil {
 		post.Date, err = retrievePostCreationDateById(post.Id)
 		if err != nil {
